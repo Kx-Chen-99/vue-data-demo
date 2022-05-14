@@ -12,7 +12,7 @@ module.exports = function(app) {
         "Benchmark|1": [ "CINT2017", "CFP2017", "RINT2017", "RFP2017", "CINT2006", "CFP2006", "RINT2006", "RFP2006" ],
         "System": "@title(2,3)",
         "Professor|1": [ "AMD", "Intel"],
-        "Professor MHz": function() {
+        "MHz": function() {
           return random(17,40)*100
         },
         "Cores": function() {
@@ -51,7 +51,7 @@ module.exports = function(app) {
         },
         "Storage|1": ["1 x 1 TB SATA SSD", "1 x 1 TB  HDD, 7.2K RPM", "1 x 1 TB SATA, 7200 RPM, RAID 0", "1 x 1200 GB SAS, 10000 RPM", "1 x 400 GB SAS SSD, RAID 0"],
         "Test": /[A-Z]/, // 测试者、被测试者
-        "Test Date": function() {
+        "Date": function() {
           return random(2006,2022) + "-" + random(1,12)
         },
         "Cache1|1": ["32 KB I + 32 KB D on chip per core", "64 KB I + 32 KB D on chip per core", "32 KB I + 64 KB D on chip per core", "64 KB I + 64 KB D on chip per core"],
