@@ -19,4 +19,5 @@ npm run serve
 
 ### 使用的插件
 Mock：假数据的好朋友<br>
-EChart：画饼专业户
+ECharts：画饼专业户<br>
+Moment：JS日期处理类库
