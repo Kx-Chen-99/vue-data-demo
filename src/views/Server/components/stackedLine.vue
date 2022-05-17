@@ -34,18 +34,18 @@ export default {
   methods: {
     draw() {
       for (const i in this.selectInfo) {
-        this.System[i] = this.selectInfo[i].System
-        this.Base[i] = this.selectInfo[i].Baseline
-        this.Base500[i] = this.selectInfo[i].Base500
-        this.Base502[i] = this.selectInfo[i].Base502
-        this.Base505[i] = this.selectInfo[i].Base505
-        this.Base520[i] = this.selectInfo[i].Base520
-        this.Base523[i] = this.selectInfo[i].Base523
-        this.Base525[i] = this.selectInfo[i].Base525
-        this.Base531[i] = this.selectInfo[i].Base531
-        this.Base541[i] = this.selectInfo[i].Base541
-        this.Base548[i] = this.selectInfo[i].Base548
-        this.Base557[i] = this.selectInfo[i].Base557
+        this.System[i] = this.selectInfo[i].processor
+        this.Base[i] = this.selectInfo[i].baseline
+        this.Base500[i] = this.selectInfo[i].base500
+        this.Base502[i] = this.selectInfo[i].base502
+        this.Base505[i] = this.selectInfo[i].base505
+        this.Base520[i] = this.selectInfo[i].base520
+        this.Base523[i] = this.selectInfo[i].base523
+        this.Base525[i] = this.selectInfo[i].base525
+        this.Base531[i] = this.selectInfo[i].base531
+        this.Base541[i] = this.selectInfo[i].base541
+        this.Base548[i] = this.selectInfo[i].base548
+        this.Base557[i] = this.selectInfo[i].base557
       }
       var echarts = require('echarts');
       var myChart = echarts.init(document.getElementById('stackedLine'));

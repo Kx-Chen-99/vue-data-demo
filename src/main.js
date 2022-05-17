@@ -14,12 +14,13 @@ createApp(App)
   .use(router)
   .mount("#app");
 
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-axios.defaults.transformRequest = [function (data) {
-  let ret = ''
-  for (let it in data) {
-      ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-  }
-  ret = ret.substring(0, ret.lastIndexOf('&'));
-  return ret
-}]
+// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+// axios.defaults.transformRequest = [function (data) {
+//   let ret = ''
+//   for (let it in data) {
+//       ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+//   }
+//   ret = ret.substring(0, ret.lastIndexOf('&'));
+//   return ret
+// }]

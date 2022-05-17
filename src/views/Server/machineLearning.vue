@@ -18,61 +18,8 @@
         </q-stepper-navigation>
       </q-step>
 
-      <q-step :name="2" title="选择CPU" :done="step > 2">
-        <q-table
-          row-key="processor"
-          :rows="rows"
-          :columns="columns"
-          :filter="filter"
-          class="my-sticky-header-table"
-          selection="multiple"
-          v-model:selected="selected"
-        >
-          <template v-slot:top>
-            <q-input bg-color="" dark standout dense v-model="filter" placeholder="Search">
-              <template v-slot:append>
-                <q-icon name="search" />
-              </template>
-            </q-input>
-          </template>
-        </q-table>
-        <q-stepper-navigation>
-          <q-btn v-if="selected.length > 1" @click="step = 3" color="primary" label="Continue" />
-          <q-btn flat @click="step = 1" color="primary" label="Back" class="q-ml-sm" />
-        </q-stepper-navigation>
-      </q-step>
-
-      <q-step :name="3" title="生成分析报告">
-        <div class="text-center text-h4 q-pb-md">CPU分析报告</div>
-        <div class="row q-pb-lg">
-          <div class="col">CPU测评基准：{{benchmark}}</div>
-          <div class="col">报告生成时间：{{now}}</div>
-        </div>
-        <div class="q-pt-lg text-center text-h5">CPU参数详情</div>
-        <q-table
-          class="q-mb-lg"
-          flat
-          dense
-          bordered
-          :rows="selected"
-          :columns="columns1"
-          row-key="System"
-          separator="vertical"
-        />
-        <div class="q-pt-lg text-center text-h5">CPU在各基准下的得分详情</div>
-        <q-table
-          flat
-          dense
-          bordered
-          :rows="selected"
-          :columns="columns2"
-          row-key="System"
-          separator="vertical"
-          class="q-mb-lg"
-        />
-        <div class="q-pt-md text-center text-h5">CPU各基准得分比较</div>
-        <stacked-line :selectInfo="selected" class="q-pb-lg" />
-        <div class="q-pt-md text-center text-h5">各基准含义</div>
+      <q-step :name="2" title="输入基准得分" :done="step > 2">
+        <div class="q-pb-xs text-center text-h5">各基准含义</div>
         <q-list bordered dense class="">
           <q-item clickable v-ripple>
             <q-item-section>
@@ -160,6 +107,91 @@
             </q-item-section>
           </q-item>
         </q-list>
+        <div class="q-pt-lg q-pb-xs text-center text-h5">请输入各基准测试得分</div>
+        <div>
+          <div class="row items-center q-gutter-x-md q-py-sm">
+            <div class="col-1">500 Base：</div>
+            <div class="col q-pr-lg"><q-input dense outlined v-model="baseInfo.base500" label="500 Base" /></div>
+            <div class="col-1">502 Base：</div>
+            <div class="col"><q-input dense outlined v-model="baseInfo.base502" label="502 Base" /></div>
+          </div>
+          <div class="row items-center q-gutter-x-md q-py-sm">
+            <div class="col-1">505 Base：</div>
+            <div class="col q-pr-lg"><q-input dense outlined v-model="baseInfo.base505" label="505 Base" /></div>
+            <div class="col-1">520 Base：</div>
+            <div class="col"><q-input dense outlined v-model="baseInfo.base520" label="520 Base" /></div>
+          </div>
+          <div class="row items-center q-gutter-x-md q-py-sm">
+            <div class="col-1">523 Base：</div>
+            <div class="col q-pr-lg"><q-input dense outlined v-model="baseInfo.base523" label="523 Base" /></div>
+            <div class="col-1">525 Base：</div>
+            <div class="col"><q-input dense outlined v-model="baseInfo.base525" label="525 Base" /></div>
+          </div>
+          <div class="row items-center q-gutter-x-md q-py-sm">
+            <div class="col-1">531 Base：</div>
+            <div class="col q-pr-lg"><q-input dense outlined v-model="baseInfo.base531" label="531 Base" /></div>
+            <div class="col-1">541 Base：</div>
+            <div class="col"><q-input dense outlined v-model="baseInfo.base541" label="541 Base" /></div>
+          </div>
+          <div class="row items-center q-gutter-x-md q-py-sm">
+            <div class="col-1">548 Base：</div>
+            <div class="col q-pr-lg"><q-input dense outlined v-model="baseInfo.base548" label="548 Base" /></div>
+            <div class="col-1">557 Base：</div>
+            <div class="col"><q-input dense outlined v-model="baseInfo.base557" label="557 Base" /></div>
+          </div>
+        </div>
+        <q-stepper-navigation>
+          <q-btn @click="goPredict" color="primary" label="Continue" />
+          <q-btn flat @click="step = 1" color="primary" label="Back" class="q-ml-sm" />
+        </q-stepper-navigation>
+      </q-step>
+
+      <q-step :name="3" title="生成预测结果">
+        <div class="text-center text-h4 q-pb-md">CPU得分预测</div>
+        <div class="row q-pb-lg">
+          <div class="col">CPU测评基准：{{benchmark}}</div>
+          <div class="col">报告生成时间：{{now}}</div>
+        </div>
+        <div class="q-pt-lg text-center text-h5">预测情况</div>
+        <q-list class="text-center q-my-md" separator bordered dense>
+          <q-item>
+            <q-item-section>500 Base</q-item-section>
+            <q-item-section>502 Base</q-item-section>
+            <q-item-section>505 Base</q-item-section>
+            <q-item-section>520 Base</q-item-section>
+            <q-item-section>523 Base</q-item-section>
+            <q-item-section>525 Base</q-item-section>
+            <q-item-section>531 Base</q-item-section>
+            <q-item-section>541 Base</q-item-section>
+            <q-item-section>548 Base</q-item-section>
+            <q-item-section>557 Base</q-item-section>
+            <q-item-section class="bg-blue">Baseline</q-item-section>
+          </q-item>
+          <q-item>
+            <q-item-section>{{ this.baseInfo.base500 }}</q-item-section>
+            <q-item-section>{{ this.baseInfo.base502 }}</q-item-section>
+            <q-item-section>{{ this.baseInfo.base505 }}</q-item-section>
+            <q-item-section>{{ this.baseInfo.base520 }}</q-item-section>
+            <q-item-section>{{ this.baseInfo.base523 }}</q-item-section>
+            <q-item-section>{{ this.baseInfo.base525 }}</q-item-section>
+            <q-item-section>{{ this.baseInfo.base531 }}</q-item-section>
+            <q-item-section>{{ this.baseInfo.base541 }}</q-item-section>
+            <q-item-section>{{ this.baseInfo.base548 }}</q-item-section>
+            <q-item-section>{{ this.baseInfo.base557 }}</q-item-section>
+            <q-item-section>{{ this.baseline }}</q-item-section>
+          </q-item>
+        </q-list>
+        <div class="q-pt-lg q-pb-md text-center text-h5">得分相近的CPU</div>
+        <q-table
+          flat
+          dense
+          bordered
+          :rows="CPUs"
+          :columns="columns1"
+          row-key="processor"
+          separator="vertical"
+          class="q-mb-lg"
+        />
         <q-stepper-navigation>
           <q-btn @click="step = 3" color="primary" label="Download" />
           <q-btn flat @click="step = 2" color="primary" label="Back" class="q-ml-sm" />
@@ -171,13 +203,9 @@
 
 <script>
 import moment from "moment";
-import stackedLine from "./components/stackedLine";
 
 export default {
-  name: "detail",
-  components: {
-    stackedLine
-  },
+  name: 'ml',
   data () {
     return {
       step: 1,
@@ -192,93 +220,34 @@ export default {
         { benchmark: "RINT2006", discribe: "使用12个整数密集型基准，一次运行多个任务，吞吐量越高得分越高" },
         { benchmark: "RFP2006", discribe: "使用17个浮点密集型基准，一次运行多个任务，吞吐量越高得分越高" },
       ],
-      filter: '',
-      columns: [
-        { name: 'processor', label: 'CPU', align: 'left',field: 'processor', sortable: true },
-        { name: 'cores', label: 'cores', field: 'cores', sortable: true },
-        { name: 'chips', label: 'chips', field: 'chips', sortable: true },
-        { name: 'firstLevelCache', label: '1st Level Cache', field: 'firstLevelCache', sortable: true },
-        { name: 'secondLevelCache', label: '2nd Level Cache', field: 'secondLevelCache', sortable: true },
-        { name: 'thirdLevelCache', label: '3rd Level Cache', field: 'thirdLevelCache', sortable: true },
-        { name: 'memory', label: 'memory', field: 'memory', sortable: true },
-        { name: 'storage', label: 'storage', field: 'storage', sortable: true },
-        { name: 'baseline', label: 'base', field: 'baseline', sortable: true },
-        { name: '500 Base', label: '500 Base', field: 'base500', sortable: true },
-        { name: '502 Base', label: '502 Base', field: 'base502', sortable: true },
-        { name: '505 Base', label: '505 Base', field: 'base505', sortable: true },
-        { name: '520 Base', label: '520 Base', field: 'base520', sortable: true },
-        { name: '523 Base', label: '523 Base', field: 'base523', sortable: true },
-        { name: '525 Base', label: '525 Base', field: 'base525', sortable: true },
-        { name: '531 Base', label: '531 Base', field: 'base531', sortable: true },
-        { name: '541 Base', label: '541 Base', field: 'base541', sortable: true },
-        { name: '548 Base', label: '548 Base', field: 'base548', sortable: true },
-        { name: '557 Base', label: '557 Base', field: 'base557', sortable: true },
-      ],
+      baseInfo: { base500: 0, base502: 0, base505: 0, base520: 0, base523: 0, base525: 0, base531: 0, base541: 0, base548: 0, base557: 0 },
+      now: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+      baseline: 0,
       columns1: [
         { name: 'processor', label: 'CPU', align: 'left',field: 'processor', sortable: true },
+        { name: 'baseline', label: 'base', field: 'baseline', sortable: true },
+        { name: 'processorFre', label: 'processorFre', field: 'processorFre', sortable: true },
         { name: 'cores', label: 'cores', field: 'cores', sortable: true },
         { name: 'chips', label: 'chips', field: 'chips', sortable: true },
         { name: 'firstLevelCache', label: '1st Level Cache', field: 'firstLevelCache', sortable: true },
         { name: 'secondLevelCache', label: '2nd Level Cache', field: 'secondLevelCache', sortable: true },
         { name: 'thirdLevelCache', label: '3rd Level Cache', field: 'thirdLevelCache', sortable: true },
         { name: 'memory', label: 'memory', field: 'memory', sortable: true },
-        { name: 'storage', label: 'storage', field: 'storage', sortable: true },
+        // { name: 'storage', label: 'storage', field: 'storage', sortable: true },
       ],
-      columns2: [
-        { name: 'processor', label: 'CPU', align: 'left',field: 'processor', sortable: true },
-        { name: 'baseline', label: 'base', field: 'baseline', sortable: true },
-        { name: '500 Base', label: '500 Base', field: 'base500', sortable: true },
-        { name: '502 Base', label: '502 Base', field: 'base502', sortable: true },
-        { name: '505 Base', label: '505 Base', field: 'base505', sortable: true },
-        { name: '520 Base', label: '520 Base', field: 'base520', sortable: true },
-        { name: '523 Base', label: '523 Base', field: 'base523', sortable: true },
-        { name: '525 Base', label: '525 Base', field: 'base525', sortable: true },
-        { name: '531 Base', label: '531 Base', field: 'base531', sortable: true },
-        { name: '541 Base', label: '541 Base', field: 'base541', sortable: true },
-        { name: '548 Base', label: '548 Base', field: 'base548', sortable: true },
-        { name: '557 Base', label: '557 Base', field: 'base557', sortable: true },
-      ],
-      rows: [],
-      selected: [],
-      now: moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+      CPUs: [],
     }
   },
-  mounted() {
-    this.getData()
-  },
   methods: {
-    getData () {
-      this.axios.get('/rint2017').then(res => {
-        this.rows = res.data
-      }).catch(err => {
-        console.log(err)
+    goPredict () {
+      this.step = 3
+      this.axios.post('/ml', this.baseInfo).then(res => {
+        this.baseline = res.data
       })
-    },
+      this.axios.post('/predict', this.baseInfo).then(res => {
+        this.CPUs = res.data
+      })
+    }
   }
 }
 </script>
-
-<style lang="sass">
-.my-sticky-header-table
-  /* height or max-height is important */
-  max-height: 800px
-
-  .q-table__top,
-  //.q-table__bottom,
-  thead tr:first-child th
-    /* bg color is important for th; just specify one */
-    background-color: rgba(2, 92, 196, 0.84)
-    color: white
-    font-size: small
-
-  thead tr th
-    position: sticky
-    z-index: 1
-  thead tr:first-child th
-    top: 0
-
-  /* this is when the loading indicator appears */
-  &.q-table--loading thead tr:last-child th
-    /* height of all previous header rows */
-    top: 48px
-</style>

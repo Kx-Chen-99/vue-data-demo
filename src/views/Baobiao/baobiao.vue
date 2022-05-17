@@ -1,42 +1,54 @@
 <template>
   <q-card>
     <q-tabs dense v-model="tab" class="text-black bg-grey-3" align="justify" narrow-indicator>
-      <q-tab name="topList" label="各标准得分Top10" />
-      <q-tab name="list" label="数据报表还能放什么" />
-      <q-btn-dropdown auto-close stretch flat label="其他">
-        <q-list dense>
-          <q-item clickable @click="tab = 'movies'">
-            <q-item-section>Movies</q-item-section>
-          </q-item>
-          <q-item clickable @click="tab = 'photos'">
-            <q-item-section>Photos</q-item-section>
-          </q-item>
-        </q-list>
-      </q-btn-dropdown>
+      <q-tab name="cpu" label="CPU Top10" />
+      <q-tab name="power" label="Power Top10" />
+      <q-tab name="jvm" label="JVM Top10" />
     </q-tabs>
     <q-tab-panels v-model="tab">
-      <q-tab-panel name="topList">
-        <top-list />
+      <q-tab-panel name="cpu">
+        <q-list bordered padding class="rounded-borders">
+          <q-item clickable v-ripple v-for="item in cpuData" :key="item.processor">
+            <q-item-section>{{item.processor}}</q-item-section>
+            <q-item-section>{{item.supplier}}</q-item-section>
+            <q-item-section side>{{item.baseline}}</q-item-section>
+          </q-item>
+        </q-list>
       </q-tab-panel>
-      <q-tab-panel name="list">
-        111
+      <q-tab-panel name="power">
+        <q-list bordered padding class="rounded-borders">
+          <q-item clickable v-ripple v-for="item in powerData" :key="item.processor">
+            <q-item-section>{{item.processor}}</q-item-section>
+            <q-item-section>{{item.jvmVendor}}</q-item-section>
+            <q-item-section>{{item.jvmVersion}}</q-item-section>
+            <q-item-section side>{{item.result}}</q-item-section>
+          </q-item>
+        </q-list>
+      </q-tab-panel>
+      <q-tab-panel name="jvm">
+        <q-list bordered padding class="rounded-borders">
+          <q-item clickable v-ripple v-for="item in jvmData" :key="item.processor">
+            <q-item-section>{{item.processor}}</q-item-section>
+            <q-item-section>{{item.jvmVendor}}</q-item-section>
+            <q-item-section>{{item.jvm}}</q-item-section>
+            <q-item-section side>{{item.scores}}</q-item-section>
+          </q-item>
+        </q-list>
       </q-tab-panel>
     </q-tab-panels>
   </q-card>
 </template>
 
 <script>
-import topList from "./components/topList";
 
 export default {
   name: "baobiao",
-  components: {
-    topList
-  },
   data () {
     return {
-      tab: 'topList',
-      data: ''
+      tab: 'cpu',
+      cpuData: [],
+      powerData: [],
+      jvmData: [],
     }
   },
   mounted() {
@@ -44,11 +56,14 @@ export default {
   },
   methods: {
     getData () {
-      this.axios.get('/data').then(res => {
-        this.data = res.data.CPU
-        // console.log(this.data)
-      }).catch(err => {
-        console.log(err)
+      this.axios.get('/get/cputop').then(res => {
+        this.cpuData = res.data
+      })
+      this.axios.get('/get/powertop').then(res => {
+        this.powerData = res.data
+      })
+      this.axios.get('/get/jvmtop').then(res => {
+        this.jvmData = res.data
       })
     }
   }
