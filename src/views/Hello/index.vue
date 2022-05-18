@@ -25,7 +25,7 @@
     <q-drawer v-model="leftDrawerOpen" show-if-above bordered class="bg-grey-2" :width="200">
       <q-tabs v-model="tab" vertical class="text-black" active-bg-color="grey-4">
         <q-tab name="home" label="首页概览" />
-        <q-tab name="list" label="数据报表" />
+        <q-tab name="baobiao" label="数据报表" />
         <q-tab name="kanban" label="数据看板" />
         <q-tab name="server" label="数据服务" />
         <q-tab name="project" label="项目管理" />
@@ -40,7 +40,7 @@
         <q-tab-panel name="home">
           <div>首页概览</div>
         </q-tab-panel>
-        <q-tab-panel name="list">
+        <q-tab-panel name="baobiao">
           <baobiao />
         </q-tab-panel>
         <q-tab-panel name="kanban">
@@ -55,8 +55,8 @@
 </template>
 
 <script>
-import baobiao from "../Baobiao/baobiao.vue";
-import kanban from "../Kanban/kanban.vue";
+import baobiao from "../Baobiao/baobiao";
+import kanban from "../Kanban/kanban";
 import server from "../Server/server";
 
 export default {
@@ -64,7 +64,7 @@ export default {
   components: {
     server,
     baobiao,
-    kanban
+    kanban,
   },
   data () {
     return {

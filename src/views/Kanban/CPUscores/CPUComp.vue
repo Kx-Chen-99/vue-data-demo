@@ -1,6 +1,6 @@
 <template>
   <div class="row items-center">
-    <div class="col-4 q-pr-md">
+    <div class="col-5 q-pr-md">
       <q-card flat bordered>
         <q-card-section class="text-center">
           <div class="q-pb-sm text-body1">{{ showItem.processor }}</div>
@@ -26,6 +26,22 @@
             <q-item>
               <q-item-section>Chips</q-item-section>
               <q-item-section side>{{ showItem.chips }}</q-item-section>
+            </q-item>
+            <q-item>
+              <q-item-section>Memory</q-item-section>
+              <q-item-section side>{{ showItem.memory }}</q-item-section>
+            </q-item>
+            <q-item>
+              <q-item-section>一级缓存</q-item-section>
+              <q-item-section side>{{ showItem.firstLevelCache }}</q-item-section>
+            </q-item>
+            <q-item>
+              <q-item-section>二级缓存</q-item-section>
+              <q-item-section side>{{ showItem.secondLevelCache }}</q-item-section>
+            </q-item>
+            <q-item>
+              <q-item-section>三级缓存</q-item-section>
+              <q-item-section side>{{ showItem.thirdLevelCache }}</q-item-section>
             </q-item>
             <q-item>
               <q-item-section>更新时间</q-item-section>

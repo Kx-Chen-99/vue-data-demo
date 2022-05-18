@@ -1,7 +1,29 @@
 <template>
   <div>
     <q-stepper v-model="step" color="primary" animated>
-      <q-step :name="1" title="选择Benchmark" :done="step > 1">
+      <q-step :name="1" title="简介" :done="step > 1">
+        <div class="text-center text-h5">CPU综合性能得分预测</div>
+        <div class="text-center text-body2 text-grey q-pb-xs">在CPU某个测评标准下，若测试程序强制中断，基于已测试完成的部分任务分数预测该基准下的总分数
+        </div>
+        <q-separator />
+        <div class="q-pa-md q-gutter-y-xs text-body1">
+          <div>使用此功能，你可以：</div>
+          <div>1、选择某个测评标准作为预测基准分数</div>
+          <div>2、通过提供不完整的分数序列预测总体分数</div>
+          <div>3、与同一基准下的不同CPU进行对比</div>
+        </div>
+        <div class="q-pa-md q-gutter-y-xs text-body1">
+          <div>简易操作指南：</div>
+          <div>1、选择Benchmark：SPEC CPU2017的8个测评标准</div>
+          <div>2、输入基准得分：请至少输入一个基准得分，输入的得分越具体，预测结果越准确</div>
+          <div>3、生成预测报告：可以查看并下载</div>
+        </div>
+        <q-stepper-navigation>
+          <q-btn @click="step = 2" color="primary" label="Continue" class="flex justify-end"/>
+        </q-stepper-navigation>
+      </q-step>
+
+      <q-step :name="2" title="选择Benchmark" :done="step > 2">
         <q-list dense v-for="item in Benchmark" :key="item.benchmark">
           <q-item tag="label" v-ripple>
             <q-item-section avatar>
@@ -14,11 +36,12 @@
           </q-item>
         </q-list>
         <q-stepper-navigation>
-          <q-btn v-if="benchmark" @click="step = 2" color="primary" label="Continue" class="flex justify-end"/>
+          <q-btn v-if="benchmark" @click="step = 3" color="primary" label="Continue" />
+          <q-btn flat @click="step = 1" color="primary" label="Back" class="q-ml-sm" />
         </q-stepper-navigation>
       </q-step>
 
-      <q-step :name="2" title="输入基准得分" :done="step > 2">
+      <q-step :name="3" title="输入基准得分" :done="step > 3">
         <div class="q-pb-xs text-center text-h5">各基准含义</div>
         <q-list bordered dense class="">
           <q-item clickable v-ripple>
@@ -142,11 +165,11 @@
         </div>
         <q-stepper-navigation>
           <q-btn @click="goPredict" color="primary" label="Continue" />
-          <q-btn flat @click="step = 1" color="primary" label="Back" class="q-ml-sm" />
+          <q-btn flat @click="step = 2" color="primary" label="Back" class="q-ml-sm" />
         </q-stepper-navigation>
       </q-step>
 
-      <q-step :name="3" title="生成预测结果">
+      <q-step :name="4" title="生成预测结果">
         <div class="text-center text-h4 q-pb-md">CPU得分预测</div>
         <div class="row q-pb-lg">
           <div class="col">CPU测评基准：{{benchmark}}</div>
@@ -193,8 +216,8 @@
           class="q-mb-lg"
         />
         <q-stepper-navigation>
-          <q-btn @click="step = 3" color="primary" label="Download" />
-          <q-btn flat @click="step = 2" color="primary" label="Back" class="q-ml-sm" />
+          <q-btn @click="step = 4" color="primary" label="Download" />
+          <q-btn flat @click="step = 3" color="primary" label="Back" class="q-ml-sm" />
         </q-stepper-navigation>
       </q-step>
     </q-stepper>
@@ -240,7 +263,7 @@ export default {
   },
   methods: {
     goPredict () {
-      this.step = 3
+      this.step = 4
       this.axios.post('/ml', this.baseInfo).then(res => {
         this.baseline = res.data
       })
