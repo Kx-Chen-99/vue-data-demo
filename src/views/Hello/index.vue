@@ -28,10 +28,10 @@
         <q-tab name="baobiao" label="数据报表" />
         <q-tab name="kanban" label="数据看板" />
         <q-tab name="server" label="数据服务" />
-        <q-tab name="project" label="项目管理" />
+<!--        <q-tab name="project" label="项目管理" />-->
         <q-tab name="asset" label="数据资产" />
-        <q-tab name="gather" label="数据集成" />
-        <q-tab name="develop" label="数据开发" />
+<!--        <q-tab name="gather" label="数据集成" />-->
+<!--        <q-tab name="develop" label="数据开发" />-->
       </q-tabs>
     </q-drawer>
 
