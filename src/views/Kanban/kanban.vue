@@ -60,18 +60,18 @@ export default {
       // CPUbtn: 'comp',
     }
   },
-  mounted() {
-    this.getData()
-  },
-  methods: {
-    getData () {
-      this.axios.get('/data').then(res => {
-        this.data = res.data.CPU
-      }).catch(err => {
-        console.log(err)
-      })
-    }
-  }
+  // mounted() {
+  //   this.getData()
+  // },
+  // methods: {
+  //   getData () {
+  //     this.axios.get('/data').then(res => {
+  //       this.data = res.data.CPU
+  //     }).catch(err => {
+  //       console.log(err)
+  //     })
+  //   }
+  // }
 }
 </script>
 

@@ -38,7 +38,7 @@
     <q-page-container>
       <q-tab-panels v-model="tab" animated swipeable vertical>
         <q-tab-panel name="home">
-          <div>首页概览</div>
+          <overview />
         </q-tab-panel>
         <q-tab-panel name="baobiao">
           <baobiao />
@@ -58,6 +58,7 @@
 import baobiao from "../Baobiao/baobiao";
 import kanban from "../Kanban/kanban";
 import server from "../Server/server";
+import overview from "./overview";
 
 export default {
   name: "hello",
@@ -65,6 +66,7 @@ export default {
     server,
     baobiao,
     kanban,
+    overview
   },
   data () {
     return {

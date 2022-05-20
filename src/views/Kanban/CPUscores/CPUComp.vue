@@ -52,7 +52,7 @@
       </q-card>
     </div>
     <q-virtual-scroll
-      style="max-height: 600px; width: 100%"
+      style="max-height: 700px; width: 100%;"
       :items="heavyList"
       separator
       class="col"
