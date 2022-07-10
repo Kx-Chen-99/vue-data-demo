@@ -11,7 +11,7 @@
             <q-icon size="70px" name="leaderboard" color="blue-5" />
             <div class="q-gutter-y-xs">
               <div class="q-pt-sm ">数据源总数</div>
-              <div class="text-right">5</div>
+              <div class="text-right">3</div>
             </div>
           </div>
         </q-card>
@@ -22,7 +22,7 @@
             <q-icon size="70px" name="description" color="teal-5" />
             <div class="q-gutter-y-xs">
               <div class="q-pt-sm">数据服务数</div>
-              <div class="text-right">2</div>
+              <div class="text-right">4</div>
             </div>
           </div>
         </q-card>

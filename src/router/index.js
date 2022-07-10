@@ -1,17 +1,17 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Home from "../views/Home.vue";
-import hello from "../views/Hello/index.vue";
+// import Home from "../views/Home.vue";
+// import hello from "../views/Hello/index.vue";
 
 const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    component: () => import("../views/Home"),
   },
   {
     path: "/hello",
     name: "hello",
-    component: hello,
+    component: () => import("../views/Hello"),
     meta: {
       title: "helloworld"
     }
@@ -29,7 +29,8 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
-  routes,
+  // history: createWebHashHistory(process.env.BASE_URL),
+  routes
 });
 
 export default router;
