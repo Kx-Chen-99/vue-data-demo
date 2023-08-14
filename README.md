@@ -20,4 +20,5 @@ npm run serve
 ### 使用的插件
 Mock：假数据的好朋友<br>
 ECharts：画饼专业户<br>
-Moment：JS日期处理类库
+Moment：JS日期处理类库<br>
+Webpack版本：4.46.0（版本太高将会打包失败）

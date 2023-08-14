@@ -55,10 +55,10 @@
 </template>
 
 <script>
-import baobiao from "../Baobiao/baobiao";
-import kanban from "../Kanban/kanban";
-import server from "../Server/server";
-import overview from "./overview";
+import baobiao from "../Baobiao/baobiao.vue";
+import kanban from "../Kanban/kanban.vue";
+import server from "../Server/server.vue";
+import overview from "./overview.vue";
 
 export default {
   name: "hello",
@@ -66,9 +66,9 @@ export default {
     server,
     baobiao,
     kanban,
-    overview
+    overview,
   },
-  data () {
+  data() {
     return {
       leftDrawerOpen: true,
       tab: 'home'

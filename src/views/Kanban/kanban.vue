@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import CPUComp from "./CPUscores/CPUComp";
+import CPUComp from "./CPUscores/CPUComp.vue";
 // import sponsorPie from "./components/sponsorPie.vue";
 // import CPUSingle from "./CPUscores/CPUSingle";
 // import CPUMult from "./CPUscores/CPUMult";
@@ -75,8 +75,9 @@ export default {
 }
 </script>
 
-<style lang="sass">
-.link-color
-  color: white
-  background: #F2C037
+<style scoped>
+.link-color {
+  color: white;
+  background: #F2C037;
+}
 </style>

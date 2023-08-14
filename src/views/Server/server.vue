@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import detail from "./detail";
-import machineLearning from "./machineLearning";
+import detail from "./detail.vue";
+import machineLearning from "./machineLearning.vue";
 
 export default {
   name: "server",

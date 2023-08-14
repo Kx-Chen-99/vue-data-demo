@@ -6,12 +6,12 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: () => import("../views/Home"),
+    component: () => import("../views/Home.vue"),
   },
   {
     path: "/hello",
     name: "hello",
-    component: () => import("../views/Hello"),
+    component: () => import("../views/Hello/index.vue"),
     meta: {
       title: "helloworld"
     }

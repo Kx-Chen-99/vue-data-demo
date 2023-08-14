@@ -193,7 +193,7 @@
 
 <script>
 import moment from "moment";
-import stackedLine from "./components/stackedLine";
+import stackedLine from "./components/stackedLine.vue";
 
 export default {
   name: "detail",
@@ -280,27 +280,31 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<!-- <style lang="scss" scoped>
 .my-sticky-header-table
   /* height or max-height is important */
-  max-height: 800px
+  max-height: 800px;
 
   .q-table__top,
   //.q-table__bottom,
-  thead tr:first-child th
+  thead tr:first-child th {
     /* bg color is important for th; just specify one */
-    background-color: rgba(2, 92, 196, 0.84)
-    color: white
-    font-size: small
+    background-color: rgba(2, 92, 196, 0.84);
+    color: white;
+    font-size: small;
+  }
 
-  thead tr th
-    position: sticky
-    z-index: 1
-  thead tr:first-child th
-    top: 0
+  thead tr th {
+    position: sticky;
+    z-index: 1;
+  }
+  thead tr:first-child th {
+    top: 0;
+  }
 
   /* this is when the loading indicator appears */
-  &.q-table--loading thead tr:last-child th
+  &.q-table--loading thead tr:last-child th {
     /* height of all previous header rows */
-    top: 48px
-</style>
+    top: 48px;
+  }
+</style> -->
